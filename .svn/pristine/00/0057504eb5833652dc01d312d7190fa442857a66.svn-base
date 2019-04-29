@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>手游</title>
+		<!--视口-->
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="icon" href="images/favicon.ico" />
+		<link rel="stylesheet" href="font/user/iconfont.css" />
+		<link rel="stylesheet" href="font/smile/iconfont.css" />
+		<link rel="stylesheet" href="font/add/iconfont.css" />
+		<link rel="stylesheet" href="font/card/iconfont.css" />
+		<!--引入第三方包，有依赖先引入依赖包-->
+		<!--先引入字体图标的样式文件-->
+		<link rel="stylesheet" href="lib/fontAwesome/css/font-awesome.css" />
+		<!--引入mui的样式文件-->
+		<link rel="stylesheet" href="lib/mui/css/mui.css" />
+		<!--引入less文件, rel="stylesheet/less,base.less为公共文件,可以在less文件里用@import导入-->
+		<!--<link rel="stylesheet/less" href="less/base.less" />-->
+		<!--引入less文件-->
+		<link rel="stylesheet/less" href="less/chatroom1.less" />
+		<!--引入less.js的编译器文件，在浏览器里编译less文件,必须放在less文件后面，也不能放在body结束标签后面，紧跟着less文件就好-->
+		<script type="text/javascript" src="lib/less/less.js"></script>
+		<script src="font/card/iconfont.js"></script>
+		<link href="https://vjs.zencdn.net/7.4.1/video-js.css" rel="stylesheet">
+		<script src='https://vjs.zencdn.net/7.4.1/video.js'></script>
+		<style>
+			.icon {
+				width: 1em;
+				height: 1em;
+				vertical-align: -0.15em;
+				fill: currentColor;
+				overflow: hidden;
+			}
+			.video-js .vjs-tech {position: relative !important;}
+			.msg .msg_img{float:left;width:20%;background-color:red;min-height:30px;}
+			.msg .msg_content{float:left;width:80%;border:1px solid red;}
+			.msg .msg_nickname{color:blue;}
+			.msg .msg_msg{color:green;display:inline-block;}
+			#member{position: fixed;top: 60px;height:400px;}
+			#member .list{float:left;width:100px;border:1px solid red;height:120px;}
+			#member .list .photo{width:100px;border:1px solid red;height:100px;}
+			#member .list .nickname{color:blue;text-align:center;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header id="header">
+			<a href="index.html" id="left" class="fa fa-angle-left"></a>
+			<span id="right">
+			<span >卡卡湾一号桌</span>
+			<a href="currentRecord.html" class="fa fa-bars"></a>
+			<a href="customer-service.html" class="fa fa-headphones"></a>
+			<a href="javascript:void(0)" class="iconfont" id="member_info">&#xe601</a>
+			</span>
+		</header>
+		<div id="zhibo" style="position: fixed;top: 60px;display:none;">
+			<video id="myVideo" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" data-setup='{}' style='width: 100%;height: 230px;'>
+				<source id="source" src="http://ivi.bupt.edu.cn/hls/cctv6hd.m3u8" type="application/x-mpegURL"></source>
+			</video>
+		</div>
+		<!--中间部分的主体内容-->
+		<main id="main" style="position:fixed;top:290px;background-color:inherit;width:100%;height:100px;border:1px solid red;overflow:auto;padding:10px;">
+			 
+
+		</main>
+		<!--底部-->
+		<footer id="footer">
+			<div class="up">
+				<svg class="icon" aria-hidden="true"style="font-size:28px;">
+					<use xlink:href="#icon-cards"></use>
+				</svg>
+				&nbsp;<input style="width:240px; height:35px;border-radius:20px;vertical-align:middle;margin-top:1px;" type="text" id="content" />
+				&nbsp;<span style="font-size:26px;" class="iconfont icon-smile"></span>
+				<span style="font-size:30px;" class="iconfont icon-addition" id="add"></span>
+				<button type="button" class="mui-btn mui-btn-success" id="send" style="display:none;margin-top:8px;">发送</button>
+			</div>
+			<div class="down" style="display: none;">
+				<div class="result"> 
+					<span class="icon"> </span>
+					<input type="text" placeholder="0" />
+					<span class="score">身上分：0</span>
+				</div>
+				<ul class="operate">
+					<li>闲</li>
+					<li>和</li>
+					<li>庄</li>
+					<li>闲对</li>
+					<li>庄对</li>
+					<li>双对</li>
+					<li>三宝</li>
+					<li>撤销</li>
+				</ul>
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+		</footer>
+		
+		<!--引入mui的js文件-->
+		<script type="text/javascript" src="lib/mui/js/mui.js">
+		</script>
+		<!--引入zepto的js文件-->
+		<script type="text/javascript" src="lib/zepto/zepto.min.js">
+		</script>
+		<!--引入模板引擎的js文件-->
+		<script type="text/javascript" src="lib/artTemplate/template.js">
+		</script>
+		<script type="text/javascript" src="js/chatroom1.js">
+		</script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script>
+		
+		// videojs 简单使用
+		var myVideo = videojs('myVideo', {
+			bigPlayButton: true,
+			textTrackDisplay: false,
+			posterImage: false,
+			errorDisplay: false,
+		})
+		//myVideo.play()
+		var changeVideo = function (vdoSrc) {
+			if (/\.m3u8$/.test(vdoSrc)) { //判断视频源是否是m3u8的格式
+				myVideo.src({
+					src: vdoSrc,
+					type: 'application/x-mpegURL' //在重新添加视频源的时候需要给新的type的值
+				})
+			} else {
+				myVideo.src(vdoSrc)
+			}
+			//myVideo.load();
+			//myVideo.play();
+		}
+		
+		$(function(){
+			
+			$('#main').css('height',$('body').height() - 60 - 230 - 49 + 'px');
+			$('#content').keyup(function(){
+				$('#add').css({'display':'none'});
+				$('#send').css({'display':'inline-block'});
+				if($('#content').val() == ''){
+					$('#add').css({'display':'inline'});
+					$('#send').css({'display':'none'});
+				}
+				
+			});
+			$('#send').click(function(){
+				//var content = ;
+				ws.send('{"type":"say","to_client_id":"all","to_client_name":"all","content":"'+$('#content').val()+'"}');
+				$('#content').val('');
+				$('#content').focus();
+				$('#add').css({'display':'inline'});
+				$('#send').css({'display':'none'});
+			});
+			
+			// 创建websocket
+			var ws,client_list={};
+			ws = new WebSocket("ws://localhost:7272");
+			ws.onopen = function()
+			{
+				var login_data = '{"type":"login","client_name":"'+localStorage.user_id+'","room_id":"'+getUrlParam('room_id')+'"}';
+				console.log("websocket握手成功，发送登录数据:"+login_data);
+				ws.send(login_data);
+            };
+			ws.onmessage = function(e)
+			{ 
+				console.log(e.data);
+				var data = JSON.parse(e.data);
+				switch(data['type']){
+					// 服务端ping客户端
+					case 'ping':
+						ws.send('{"type":"pong"}');
+						break;
+					// 登录 更新用户列表
+					case 'login':
+						//{"type":"login","client_id":xxx,"client_name":"xxx","client_list":"[...]","time":"xxx"}
+						//say(data['client_id'], data['client_name'],  data['client_name']+' 加入了聊天室', data['time']);
+						if(data['client_list'])
+						{
+							client_list = data['client_list'];
+						}
+						else
+						{
+							client_list[data['client_id']] = data['client_name']; 
+						}
+						
+						console.log(client_list);
+						//localStorage.client_list = JSON.stringify(client_list);
+						//flush_client_list();
+						console.log(data['client_name']+"登录成功");
+						break;
+					// 发言
+					case 'say':
+						//{"type":"say","from_client_id":xxx,"to_client_id":"all/client_id","content":"xxx","time":"xxx"}
+						say(data['from_client_id'], data['from_client_name'], data['content'], data['time']);
+						break;
+					// 用户退出 更新用户列表
+					case 'logout':
+						//{"type":"logout","client_id":xxx,"time":"xxx"}
+						//say(data['from_client_id'], data['from_client_name'], data['from_client_name']+' 退出了', data['time']);
+						delete client_list[data['from_client_id']];
+						//localStorage.client_list = JSON.stringify(client_list);
+						//flush_client_list();	
+							
+				}	
+            };
+            // 关闭 websocket
+            ws.onclose = function()
+            { 
+				mui.toast("连接已关闭...");
+            };
+			// 发言
+			function say(from_client_id, from_client_name, content, time){
+				var html = '';
+				html += '<div class="msg">';
+				html +=		'<div class="msg_img"></div>';
+				html +=		'<div class="msg_content">';
+				html +=			'<div class="msg_nickname">'+from_client_name+'</div>';
+				html +=			'<div class="msg_msg">'+content+'</div>';
+				html +=		'</div>';
+				html += '</div>';
+				/*
+				if(from_client_name == localStorage.user_id){
+					html = '<div>'+content+'</div>';
+				}
+				*/
+				$('#main').append(html);
+				$('#main').scrollTop(document.getElementById('main').scrollHeight);
+			}
+			$('#member_info').click(function(){
+				location.href = 'member-info.html?room_id='+getUrlParam('room_id');
+			});
+		});	
+		</script>
+	</body>
+
+</html>

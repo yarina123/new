@@ -1,0 +1,108 @@
+#header {
+    height: 70px;
+    line-height: 80px;
+    color: white;
+    font-size:18px;
+    letter-spacing: 1px;
+    padding: 0 10px;
+    /* font-family: "SimHei"; */
+    font-family: "微软雅黑";
+    text-align: center;
+  }
+  span{
+    font-family: "微软雅黑";
+  }
+  #header a {
+    color: white;
+    font-size: 28px;
+    font-weight: lighter;
+    float: left;
+    line-height: 80px;
+  }
+  #main {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    position: absolute;
+    top: 70px;
+  }
+  #main .user-name {
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+    height: 45px;
+    width: 100%;
+    line-height: 45px;
+  }
+  #main .user-name span {
+    color: #555555;
+    font-size: 14px;
+  }
+  #main .user-name .left {
+    float: left;
+    margin-left: 20px;
+  }
+  #main .user-name .right {
+    float: right;
+    margin-right: 20px;
+  }
+  #main .all {
+    margin-top: 50px;
+    width: 100%;
+    height: 180px;
+  }
+  #main .all > .ID-num,
+  #main .all .record,
+  #main .all .account,
+  #main .all .last-loginTime,
+  #main .all .loginPage {
+    margin: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    height: 45px;
+    width: 100%;
+    line-height: 45px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  #main .all > .ID-num span,
+  #main .all .record span,
+  #main .all .account span,
+  #main .all .last-loginTime span,
+  #main .all .loginPage span {
+    color: #555555;
+    font-size: 14px;
+    margin-left: 10px;
+  }
+  #main .all > .ID-num .left,
+  #main .all .record .left,
+  #main .all .account .left,
+  #main .all .last-loginTime .left,
+  #main .all .loginPage .left {
+    float: left;
+    margin-left: 20px;
+  }
+  #main .all > .ID-num .right,
+  #main .all .record .right,
+  #main .all .account .right,
+  #main .all .last-loginTime .right,
+  #main .all .loginPage .right {
+    float: right;
+    margin-right: 20px;
+  }
+  #main .loginPage {
+    margin: 30px;
+    margin-top: 50px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #188b65;
+    text-align: center;
+    line-height: 40px;
+  }
+  #main .loginPage a span {
+    /* font-family: "SimHei";
+     */
+     font-family: "微软雅黑";
+    color: white;
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+  

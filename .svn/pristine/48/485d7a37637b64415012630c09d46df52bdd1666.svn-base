@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>手游</title>
+		<!--视口-->
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="icon" href="images/favicon.ico" />
+		<link rel="stylesheet" href="font/user/iconfont.css" />
+		<link rel="stylesheet" href="font/smile/iconfont.css" />
+		<link rel="stylesheet" href="font/add/iconfont.css" />
+		<link rel="stylesheet" href="font/listen/iconfont.css" />
+		<link rel="stylesheet" href="font/card/iconfont.css" />
+		<!--引入第三方包，有依赖先引入依赖包-->
+		<!--先引入字体图标的样式文件-->
+		<link rel="stylesheet" href="lib/fontAwesome/css/font-awesome.css" />
+		<!--引入mui的样式文件-->
+		<link rel="stylesheet" href="lib/mui/css/mui.css" />
+		<link rel="stylesheet" href="./less/base.css">
+		<link rel="stylesheet" href="./less/member-info.css">
+		<!--引入less文件, rel="stylesheet/less,base.less为公共文件,可以在less文件里用@import导入-->
+		<!--<link rel="stylesheet/less" href="less/base.less" />-->
+		<!--引入less文件-->
+		<!-- <link rel="stylesheet/less" href="less/member-info.less" /> -->
+		<!--引入less.js的编译器文件，在浏览器里编译less文件,必须放在less文件后面，也不能放在body结束标签后面，紧跟着less文件就好-->
+		<!-- <script type="text/javascript" src="lib/less/less.js"></script> -->
+		<script src="font/card/iconfont.js"></script>
+		<style>
+			.icon {
+				width: 1em;
+				height: 1em;
+				vertical-align: -0.15em;
+				fill: currentColor;
+				overflow: hidden;
+			}
+			#member{position: fixed;top: 60px;}
+			#member .list{float:left;width:70px;height:90px;margin:10px;}
+			#member .list .photo{width:70px;height:70px;}
+			#member .list .photo img{width:100%;}
+			#member .list .nickname{color:gray;text-align:center;word-wrap: break-word;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header id="header">
+			<a href="javascript:void(0)" id="left" class="fa fa-angle-left"></a>
+			<span >成员信息</span>
+
+		</header>
+		<!--中间部分的主体内容-->
+		<!--此处应该是动态展现-->
+		<div id="member"></div>
+		<main id="main">
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<!--这里放置真实显示的DOM内容-->
+			
+
+				</div>
+			</div>
+
+		</main>
+		<!--底部-->
+		<!--<footer id="footer">
+			<div>
+				<span style="font-size:26px;" class="iconfont icon-icon_line_listen_">
+					
+				</span>
+				&nbsp;<input style="width:240px; height:35px;border-radius:20px;vertical-align:middle;margin-top:1px;" type="text"/>
+				&nbsp;<span style="font-size:26px;" class="iconfont icon-smile"></span>
+				<span style="font-size:30px;" class="iconfont icon-addition"></span>
+			</div>
+		</footer>-->
+
+		<!--引入mui的js文件-->
+		<script type="text/javascript" src="lib/mui/js/mui.js">
+		</script>
+		<!--引入zepto的js文件-->
+		<script type="text/javascript" src="lib/zepto/zepto.min.js">
+		</script>
+		<!--引入模板引擎的js文件-->
+		<script type="text/javascript" src="lib/artTemplate/template.js">
+		</script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/member-info.js">
+		</script>
+		<script>
+		// 创建websocket
+		var ws,client_list={};
+		ws = new WebSocket(websocket);
+		ws.onopen = function()
+		{
+			var login_data = {type:'login',client_name:{user_id:localStorage.user_id,nickname:localStorage.nickname,photo:localStorage.photo},room_id:getUrlParam('room_id')};
+			console.log("websocket握手成功，发送登录数据:"+JSON.stringify(login_data));
+			ws.send(JSON.stringify(login_data));
+		};
+		ws.onmessage = function(e)
+		{ 
+			console.log(e.data);
+			var data = JSON.parse(e.data);
+			switch(data['type']){
+				// 服务端ping客户端
+				case 'ping':
+					ws.send('{"type":"pong"}');
+					break;
+				// 登录 更新用户列表
+				case 'login':
+					//{"type":"login","client_id":xxx,"client_name":"xxx","client_list":"[...]","time":"xxx"}
+					//say(data['client_id'], data['client_name'],  data['client_name']+' 加入了聊天室', data['time']);
+					if(data['client_list'])
+					{
+						client_list = data['client_list'];
+					}
+					else
+					{
+						client_list[data['client_id']] = data['client_name']; 
+					}
+					
+					console.log(client_list);
+					//localStorage.client_list = JSON.stringify(client_list);
+					flush_client_list();
+					console.log(data['client_name']+"登录成功");
+					break;
+				// 发言
+				case 'say':
+					//{"type":"say","from_client_id":xxx,"to_client_id":"all/client_id","content":"xxx","time":"xxx"}
+					say(data['from_client_id'], data['from_client_name'], data['content'], data['time']);
+					break;
+				// 用户退出 更新用户列表
+				case 'logout':
+					//{"type":"logout","client_id":xxx,"time":"xxx"}
+					//say(data['from_client_id'], data['from_client_name'], data['from_client_name']+' 退出了', data['time']);
+					delete client_list[data['from_client_id']];
+					//localStorage.client_list = JSON.stringify(client_list);
+					flush_client_list();	
+						
+			}	
+		};
+		// 关闭 websocket
+		ws.onclose = function()
+		{ 
+			mui.toast("连接已关闭...");
+		};
+		//刷新列表
+		function flush_client_list(){
+			var html = '';
+			$('#member').html('');
+			$.each(client_list , function(k,v){
+				html += '<div class="list">';
+				html += 	'<div class="photo"><img src="'+v.photo+'" /></div>';
+				html += 	'<div class="nickname">'+v.nickname+'</div>';
+				html += '</div>';
+			});
+			$('#member').append(html);
+		}
+		
+		$('#left').click(function(){
+			location.href = 'chatroom1.html?room_id='+getUrlParam('room_id');
+		});
+		</script>
+	</body>
+
+</html>

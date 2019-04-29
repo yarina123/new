@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户中心界面</title>
+    <!--视口-->
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="icon" href="images/favicon.ico" />
+	<!--引入第三方包，有依赖先引入依赖包-->
+	<!--先引入字体图标的样式文件-->
+	<link rel="stylesheet" href="lib/fontAwesome/css/font-awesome.css" />
+	<link rel="stylesheet" href="font/lock/iconfont.css" />
+	<link rel="stylesheet" href="font/shezhi/iconfont.css" />
+
+	<!--引入mui的样式文件-->
+	<link rel="stylesheet" href="lib/mui/css/mui.css" />
+	<!--引入less文件, rel="stylesheet/less,base.less为公共文件,可以在less文件里用@import导入-->
+	<!--<link rel="stylesheet/less" href="less/base.less" />-->
+	<!--引入less文件-->
+	<link rel="stylesheet/less" href="less/uerCenter.less" />
+	<!--引入less.js的编译器文件，在浏览器里编译less文件,必须放在less文件后面，也不能放在body结束标签后面，紧跟着less文件就好-->
+	<script type="text/javascript" src="lib/less/less.js"></script>
+</head>
+  
+<body>
+	<!--头部-->
+	<header id="header">
+		<div class="title">我的</div>
+		<div id="userC">
+			<div id="userIcon">
+				<a href="">
+					<img src="images/wecat.jpg" alt="" /> <!--用户图像 -->
+				</a>
+			</div>
+			<div id="info">
+				<div class="userName">HW小白兔</div>   <!--昵称 -->
+				<div class="weChatNum">ID：<span id="idNum">3905</span></div>
+				<span class="shenShang">身上: <i id="shenNum"> 0 </i></span>&nbsp;<span class="safeBox"> 保险箱: <i id="boxNum"> 0</i></span>
+			</div>
+		</div>
+	</header>
+	<!--中间部分的主体内容-->
+<main id="main">
+	<div class="account">
+		<a href="accountDetail.html" class="iconfont icon-lock"><span>账号详情</span></a>
+	</div>
+	<div class="all">
+		<div class="key">
+			<a href="password.html" class="fa fa-key"><span>密码修改</span></a>
+		</div>
+		<div class="record">
+			<a href="record.html" class="fa fa-file-text-o"><span>操作记录</span></a>
+		</div>
+		<div class="loginPage">
+			<a href="login.html"><span>注销登录</span></a>
+		</div>
+	</div>
+</main>
+<!--底部-->
+	<footer id="footer">
+		<ul class="mui-row">
+			<li class="mui-col-xs-6 " >
+				<a href="index.html" class="fa fa-home active"><span>大厅</span></a>
+			</li>
+			<li class="mui-col-xs-6">
+				<a href="userCenter.html" class="fa fa-user"><span>我的</span></a>
+			</li>
+		</ul>
+	</footer>
+
+<!--引入mui的js文件-->
+<script type="text/javascript" src="lib/mui/js/mui.js">	</script>
+<!--引入zepto的js文件-->
+<script type="text/javascript" src="lib/zepto/zepto.min.js"> </script>
+<!--引入模板引擎的js文件-->
+<script type="text/javascript" src="lib/artTemplate/template.js"> </script>
+<script type="text/javascript" src="js/userCenter.js"> </script>
+</body>
+
+</html>

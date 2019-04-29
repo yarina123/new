@@ -1,0 +1,81 @@
+@import "base.less";
+#main{
+ padding-top:80px;
+    width: 100%;
+      background-color:#f1f1f6; 
+      position: absolute;
+     .logo{
+            height:90px;
+            width:100px;
+            margin:0 auto;
+            margin-bottom:20px;
+           a{
+           display: inline-block;
+           width: 100%;
+           height: 100%;
+           background:url("../images/logo.jpg") no-repeat;
+           background-position:-12px,-55px;
+           }
+       }
+
+      ul{
+           position: absolute;
+           left: 50%;
+           margin-left:-180px;
+          height: 220px;
+          padding-left:20px;        
+          li{
+              text-align: left;
+              height:50px;
+              font-size:16px; 
+              font-weight:400;     
+              margin:0 10px;
+              color:#555;
+              border-bottom:1px solid rgba(0,0,0,0.2);
+              #celCode{
+                  width:100px;
+                 margin-right:10px;
+              }
+              .get-imgcode{
+         
+                  }
+              #CelNum{
+                  margin-left:-5px;
+              }
+              span{
+                  display:inline-block;
+                  height: 30px;
+                  width: 100px;
+              }
+              img{
+                  height: 40px;
+                  width: 70px;
+                  float: right;
+//                vertical-align:middle;
+                  margin-left:3px;
+              }
+              input{
+                  height:30px;
+                  margin-top:8px;
+                  width:190px;
+                  border-radius:5px;
+                  outline: none;
+                  border: 0;
+                  background: none;
+                  padding-left:5px;
+                  font-size:12px;
+              }   
+          }
+        .register,.direct-login{
+        border: 0.2px solid rgba(0,0,0,0.2);
+        margin:30px 50px;
+        text-align: center;
+        height:40px;
+        line-height:40px;
+        a{
+            color: green;
+        }    
+    } 
+ 
+}
+}

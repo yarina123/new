@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>用户界面</title>
+		<!--视口-->
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="icon" href="images/favicon.ico" />
+		<!--引入第三方包，有依赖先引入依赖包-->
+		<!--先引入字体图标的样式文件-->
+		<link rel="stylesheet" href="lib/fontAwesome/css/font-awesome.css" />
+		<!--引入mui的样式文件-->
+		<link rel="stylesheet" href="lib/mui/css/mui.css" />
+		<!--引入less文件, rel="stylesheet/less,base.less为公共文件,可以在less文件里用@import导入-->
+		<!--<link rel="stylesheet/less" href="less/base.less" />-->
+		<!--引入less文件-->
+		<link rel="stylesheet/less" href="less/register.less" />
+		<!--引入less.js的编译器文件，在浏览器里编译less文件,必须放在less文件后面，也不能放在body结束标签后面，紧跟着less文件就好-->
+		<script type="text/javascript" src="lib/less/less.js"></script>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header id="header">
+			<h4>注册</h4>
+		</header>
+		<!--中间部分的主体内容-->
+		<div id="main">
+			<div class="logo">
+				<a href=""></a>
+			</div>
+			<div class="mui-content">
+				<ul id="verification">
+					<li>
+						<span>登录账号</span>
+						<input id="CelNum" required="required" placeholder="请输入11位手机号" type="text" maxlength="11" onkeyup="value=value.replace(/\D/g,'')" />
+					</li>
+					<li id="phCode">
+						<span id="confirmCode">验证码</span>
+						<input id="celCode" placeholder="请输入6位验证码" required="required" type="text " />
+						<span class="get-imgcode" id="zphone" style="background-color: green;
+							color: black;width:80px;font-size:12px;border-radius:10px;text-align: center;line-height:30px;">获取验证码</span>
+					</li>
+					<li><span>登录密码</span><input type="text " placeholder="密码不少于6位" id="login_password" minlength="6" required="required" /> </li>
+					<li><span>确认密码</span><input type="text " placeholder="密码不少于6位" id="confirm_password" required="required" /></li>
+					<li><span>推荐码</span><input type="text " placeholder="请输入推荐码" id="recommond_password" required="required" /></li>
+				<div class="register">
+				<a href="login.html">注册</a>
+			   </div>
+				<div class="direct-login">
+				<a href="login.html">已有账号?直接登录</a>
+			   </div>
+				</ul>
+
+			</div>
+		</div>
+		<!--底部-->
+		<!--<footer id="footer">
+			<ul class="mui-row">
+				<li class="mui-col-xs-6 ">
+					<a href="index.html" class="fa fa-home active"><span>大厅</span></a>
+				</li>
+				<li class="mui-col-xs-6">
+					<a href="userCenter.html" class="fa fa-user"><span>我的</span></a>
+				</li>
+			</ul>
+		</footer>-->
+		<!--引入mui的js文件-->
+		<script type="text/javascript" src="lib/mui/js/mui.js">
+		</script>
+		<!--引入zepto的js文件-->
+		<script type="text/javascript" src="lib/zepto/zepto.min.js">
+		</script>
+		<!--引入模板引擎的js文件-->
+		<script type="text/javascript" src="lib/artTemplate/template.js">
+		</script>
+		<script type="text/javascript" src="js/register.js">
+		</script>
+		<script>
+		//短信验证码
+		$(function(){
+		$("#zphone").click(function(){
+			var phone = $('#CelNum').val();
+			if(phone.length != 11){
+				alert('手机号必须是11位');
+				return false;
+			}
+			get_mobile_code(phone);
+			
+		});
+		function get_mobile_code(phone){
+			$.getJSON(
+				'http://122.14.196.167:81/chat-room/public/app/public/duanxin?phone='+phone+'&jsoncallback=?',
+				function(data){
+					console.log(data);
+					if(data.code == 2){
+						get_count_down();
+						mui.toast('发送成功');
+						//alert('发送成功');
+					}else{
+						mui.toast(data.msg);
+						//alert(data.msg);
+					}
+				}
+			);
+			
+		}
+		//倒计时
+		var time = 60;
+		function get_count_down() {
+			if (time === 0) { 
+			   time = 60;
+			   $('#zphone').text('重新获取');
+			   return;
+			} else { 
+			   time--;
+			   $('#zphone').text(time);
+			} 
+			setTimeout(function() { 
+			   get_count_down();
+			},1000);
+		}
+		});
+		</script>
+	</body>
+
+</html>

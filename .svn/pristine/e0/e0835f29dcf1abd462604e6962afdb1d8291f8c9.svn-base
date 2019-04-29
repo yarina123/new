@@ -1,0 +1,134 @@
+@import "base.less";
+#header {
+    height: 170px;
+    position: fixed;
+    background-color: white;
+    background: url("../images/background.png") no-repeat 100% 60% ;
+    .title {
+        text-align: center;
+        color: white;
+        padding-top: 20px;
+        //          font-weight:600;
+        letter-spacing: 2px;
+        font-family: "SimHei";
+        font-size: 22px;
+    }
+    //  width: 100%;
+    #userC {
+        letter-spacing: 2px;
+        margin-top: 10px;
+        color: white;
+        font-family: "SimHei";
+        font-size: 16px;
+        #userIcon {
+            float: left;
+            height: 100px;
+            width: 100%;
+            padding: 0;
+            padding: 10px 15px;
+            a {
+                width: 100%;
+                display: block;
+                img {
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 50%;
+                }
+            }
+        }
+        #info {
+            position: absolute;
+            top: 60px;
+            left: 105px;
+            div {
+                padding-top: 5px;
+            }
+            .weChatNum {
+                color: white;
+            }
+        }
+    }
+}
+
+body {
+    overflow: hidden;
+}
+
+#main {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    position: absolute;
+    top: 170px;
+    .account {
+        position: fixed;
+        //此处有改动！！！！！
+        //      text-align: center;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+        height: 50px;
+        width: 100%;
+        line-height: 50px;
+        >a {
+            font-size: 17px;
+            font-weight: 600;
+            font-family: "SimHei";
+            margin-left: 20px;
+            img {
+                height: 60%;
+                vertical-align: middle;
+            }
+            span {
+                color: #555555;
+                margin-left: 10px;
+            }
+        }
+    }
+    .all {
+        margin-top: 55px;
+        >.key,
+        .record {
+            background-color: rgba(255, 255, 255, 0.8);
+            height: 50px;
+            width: 100%;
+            line-height: 50px;
+            margin-top: 10px;
+            //          border-radius:10px;
+            >a {
+                margin-left: 20px;
+                font-size: 17px;
+                font-weight: 600;
+                img {
+                    height: 60%;
+                    vertical-align: middle;
+                }
+                span {
+                    font-family: "SimHei";
+                    letter-spacing:1px;
+                    color: #555555;
+                    margin-left: 10px;
+                }
+            }
+        }
+        >.record {
+            a {
+                color: purple;
+            }
+        }
+        .loginPage {
+            margin: 30px;
+            margin-top: 50px;
+            height: 50px;
+            background-color: #188b65;
+            text-align: center;
+            line-height: 50px;
+            a {
+                span {
+                    font-family: "SimHei";
+                    color: white;
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}

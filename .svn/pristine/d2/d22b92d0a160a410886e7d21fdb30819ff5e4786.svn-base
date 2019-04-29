@@ -1,0 +1,130 @@
+
+#header {
+  height: 170px;
+  position: fixed;
+  background-color: white;
+  background: url("../images/background.png") no-repeat;
+  background-size: 100%;
+}
+#header .title {
+  text-align: center;
+  color: white;
+  padding-top: 30px;
+  letter-spacing: 2px;
+  font-family:'SimHei';
+  font-size: 18px;
+}
+#header #userC {
+  letter-spacing:1px;
+  margin-top: 10px;
+  color: white;
+  font-family: "SimHei";
+  font-size: 14px;
+}
+#header #userC #userIcon {
+  float: left;
+  height: 100px;
+  width: 100%;
+  padding: 0;
+  padding: 10px 15px;
+}
+#header #userC #userIcon a {
+  width: 100%;
+  display: block;
+}
+#header #userC #userIcon a img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+#header #userC #info {
+  position: absolute;
+  top: 60px;
+  left: 105px;
+}
+#header #userC #info div {
+  padding-top: 10px;
+}
+#header #userC #info .weChatNum {
+  color: white;
+}
+body {
+  overflow: hidden;
+}
+#main {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  position: absolute;
+  top: 170px;
+}
+#main .account {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+  height: 50px;
+  width: 100%;
+  line-height: 50px;
+}
+#main .account > a {
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  font-family: "微软雅黑";
+  margin-left: 20px;
+}
+#main .account > a img {
+  height: 60%;
+  vertical-align: middle;
+}
+#main .account > a span {
+  color: #555555;
+  margin-left: 10px;
+}
+#main .all {
+  margin-top: 55px;
+}
+#main .all > .key,
+#main .all .record {
+  background-color: rgba(255, 255, 255, 0.8);
+  height: 50px;
+  width: 100%;
+  line-height: 50px;
+  margin-top: 10px;
+}
+#main .all > .key > a,
+#main .all .record > a {
+  margin-left: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+#main .all > .key > a img,
+#main .all .record > a img {
+  height: 60%;
+  vertical-align: middle;
+}
+#main .all > .key > a span,
+#main .all .record > a span {
+  font-family: "微软雅黑";
+  letter-spacing: 1px;
+  color: #555555;
+  margin-left: 10px;
+}
+#main .all > .record a {
+  color: purple;
+}
+#main .all .loginPage {
+  margin: 30px;
+  margin-top: 50px;
+  height: 40px;
+  background-color: #188b65;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 5px;
+}
+#main .all .loginPage a span {
+  font-family: "微软雅黑";
+  color: white;
+  font-size: 14px;
+  letter-spacing: 1px;
+}

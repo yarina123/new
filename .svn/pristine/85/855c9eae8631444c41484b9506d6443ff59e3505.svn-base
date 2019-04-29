@@ -1,0 +1,154 @@
+	// videojs 简单使用
+		var myVideo = videojs('myVideo', {
+			bigPlayButton: true,
+			textTrackDisplay: false,
+			posterImage: false,
+			errorDisplay: false,
+		})
+		myVideo.play()
+		var changeVideo = function (vdoSrc) {
+			if (/\.m3u8$/.test(vdoSrc)) { //判断视频源是否是m3u8的格式
+				myVideo.src({
+					src: vdoSrc,
+					type: 'application/x-mpegURL' //在重新添加视频源的时候需要给新的type的值
+				})
+			} else {
+				myVideo.src(vdoSrc)
+			}
+			myVideo.load();
+			myVideo.play();
+		}
+
+		$(function () {
+
+			$('#main').css('height', $('body').height() - 60 - 230 - 49 + 'px');
+			$('#content').keyup(function () {
+				$('#add').css({
+					'display': 'none'
+				});
+				$('#send').css({
+					'display': 'inline-block'
+				});
+				if ($('#content').val() == '') {
+					$('#add').css({
+						'display': 'inline'
+					});
+					$('#send').css({
+						'display': 'none'
+					});
+				}
+
+			});
+
+			// 创建websocket
+			var ws, client_list = {};
+			ws = new WebSocket("ws://localhost:7272");
+			ws.onopen = function () {
+				var login_data = {
+					type: 'login',
+					client_name: {
+						user_id: localStorage.user_id,
+						nickname: localStorage.nickname,
+						photo: localStorage.photo
+					},
+					room_id: getUrlParam('room_id')
+				};
+				console.log("websocket握手成功，发送登录数据:" + JSON.stringify(login_data));
+				ws.send(JSON.stringify(login_data));
+			};
+			ws.onmessage = function (e) {
+				console.log(e.data);
+				var data = JSON.parse(e.data);
+				switch (data['type']) {
+					// 服务端ping客户端
+					case 'ping':
+						ws.send('{"type":"pong"}');
+						break;
+						// 登录 更新用户列表
+					case 'login':
+						//{"type":"login","client_id":xxx,"client_name":"xxx","client_list":"[...]","time":"xxx"}
+						//say(data['client_id'], data['client_name'],  data['client_name']+' 加入了聊天室', data['time']);
+						if (data['client_list']) {
+							client_list = data['client_list'];
+						} else {
+							client_list[data['client_id']] = data['client_name'];
+						}
+
+						console.log(client_list);
+						//localStorage.client_list = JSON.stringify(client_list);
+						//flush_client_list();
+						console.log(data['client_name'] + "登录成功");
+						break;
+						// 发言
+					case 'say':
+						//{"type":"say","from_client_id":xxx,"to_client_id":"all/client_id","content":"xxx","time":"xxx"}
+						say(data['from_client_id'], data['from_client_name'], data['content'], data['time']);
+						break;
+						// 用户退出 更新用户列表
+					case 'logout':
+						//{"type":"logout","client_id":xxx,"time":"xxx"}
+						//say(data['from_client_id'], data['from_client_name'], data['from_client_name']+' 退出了', data['time']);
+						delete client_list[data['from_client_id']];
+						//localStorage.client_list = JSON.stringify(client_list);
+						//flush_client_list();	
+
+				}
+			};
+			// 关闭 websocket
+			ws.onclose = function () {
+				mui.toast("连接已关闭...");
+			};
+			//发送消息
+			$('#send').click(function () {
+				var say_data = {
+					type: 'say',
+					to_client_id: 'all',
+					to_client_name: {
+						user_id: localStorage.user_id,
+						nickname: localStorage.nickname,
+						photo: localStorage.photo
+					},
+					content: $('#content').val()
+				};
+				ws.send(JSON.stringify(say_data));
+				$('#content').val('');
+				$('#content').focus();
+				$('#add').css({
+					'display': 'inline'
+				});
+				$('#send').css({
+					'display': 'none'
+				});
+			});
+			// 发言
+			function say(from_client_id, from_client_name, content, time) {
+				var html = '';
+				html += '<div class="msg">';
+				html += '<div class="msg_img"><img src="' + from_client_name.photo + '" /></div>';
+				html += '<div class="msg_content">';
+				html += '<div class="msg_nickname">' + from_client_name.nickname + '</div>';
+				html += '<div class="msg_msg">' + content + '</div>';
+				html += '</div>';
+				html += '</div>';
+				
+				if(from_client_name == localStorage.user_id){
+					html = '<div>'+content+'</div>';
+				}
+				
+				$('#main').append(html);
+				$('#main').scrollTop(document.getElementById('main').scrollHeight);
+			}
+			$('#member_info').click(function () {
+				location.href = 'member-info.html?room_id=' + getUrlParam('room_id');
+			});
+		});
+		
+		//tlb
+	$("#footer .up .throw1").on('click',function(){
+		$("#footer").hide();
+		$('.down').show()
+	})
+$('.down').on('click',function(){
+	$("#footer").show();
+		$('.down').hide()
+})

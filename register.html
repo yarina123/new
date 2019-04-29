@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>用户界面</title>
+		<!--视口-->
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="icon" href="images/favicon.ico" />
+		<!--引入第三方包，有依赖先引入依赖包-->
+		<!--先引入字体图标的样式文件-->
+		<link rel="stylesheet" href="lib/fontAwesome/css/font-awesome.css" />
+		<!--引入mui的样式文件-->
+		<link rel="stylesheet" href="lib/mui/css/mui.css" />
+		<link rel="stylesheet" href="./less/base.css">
+		<link rel="stylesheet" href="./less/register.css">
+		<!--引入less文件, rel="stylesheet/less,base.less为公共文件,可以在less文件里用@import导入-->
+		<!--<link rel="stylesheet/less" href="less/base.less" />-->
+		<!--引入less文件-->
+		<!-- <link rel="stylesheet/less" href="less/register.less" /> -->
+		<!--引入less.js的编译器文件，在浏览器里编译less文件,必须放在less文件后面，也不能放在body结束标签后面，紧跟着less文件就好-->
+		<!-- <script type="text/javascript" src="lib/less/less.js"></script> -->
+		<script>
+		//var localStorage.user_id = 1;
+		</script>
+		<style type="text/css">
+		#login_password,#confirm_password{padding-left:0;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header id="header">
+			<h4>注册</h4>
+		</header>
+		<!--中间部分的主体内容-->
+		<div id="main">
+			<div class="logo">
+				<img src="images/logo.png"/>
+			</div>
+			<div class="mui-content">
+				<ul id="verification" >
+					<li>
+						<span>登录账号</span>
+						<input id="CelNum" required="required" placeholder="请输入11位手机号" type="text" maxlength="11" onkeyup="value=value.replace(/\D/g,'')" />
+					</li>
+					<li id="phCode" style="-webkit-user-select:text !important;！！！">
+						<span id="confirmCode">验证码</span>
+						<input id="celCode" placeholder="请输入6位验证码" required="required" type="text " style="-webkit-user-select:text !important;！！！" />
+						<span class="get-imgcode" id="get_phone_code" style="background-color: #3b9c83;
+							color: white;width:70px;font-size:12px;border-radius:3px;text-align: center;line-height:30px;letter-spacing: 1px;">点击获取</span>
+					</li>
+					<li><span>登录密码</span><input type="password" placeholder="密码不少于6位" id="login_password" minlength="6" required="required" /> </li>
+					<li><span>确认密码</span><input type="password" placeholder="密码不少于6位" id="confirm_password" required="required" /></li>
+					<li><span>推荐码</span><input type="text " placeholder="请输入推荐码" id="recommond_password" required="required" style="-webkit-user-select:text !important;！！！"/></li>
+				<div class="register">
+				<a href="javascript:void(0);" id="register">注册</a>
+			   </div>
+				<div class="direct-login">
+				<a href="login.html">已有账号 ? 直接登录</a>
+			   </div>
+				</ul>
+
+			</div>
+		</div>
+		<!--底部-->
+		<!--<footer id="footer">
+			<ul class="mui-row">
+				<li class="mui-col-xs-6 ">
+					<a href="index.html" class="fa fa-home active"><span>大厅</span></a>
+				</li>
+				<li class="mui-col-xs-6">
+					<a href="userCenter.html" class="fa fa-user"><span>我的</span></a>
+				</li>
+			</ul>
+		</footer>-->
+		<!--引入mui的js文件-->
+		<script type="text/javascript" src="lib/mui/js/mui.js">
+		</script>
+		<!--引入zepto的js文件-->
+		<script type="text/javascript" src="lib/zepto/zepto.min.js">
+		</script>
+		<!--引入模板引擎的js文件-->
+		<script type="text/javascript" src="lib/artTemplate/template.js">
+		</script>
+		<script type="text/javascript" src="js/register.js">
+		</script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script>
+		var time = 60;
+		$(function(){
+			//点击获取验证码
+			$("#get_phone_code").click(function(){
+				if(time != 60){
+					mui.toast('正在发送短信验证码');
+					return false;
+				}
+				var account = $('#CelNum').val();
+				if(account.length != 11){
+					mui.toast('手机号必须是11位');
+					//alert('手机号必须是11位');
+					return false;
+				}
+				send_phone_code(account);
+				
+			});
+			//发送短信验证码
+			function send_phone_code(account){
+				$.ajax({
+					type: 'GET',
+					url: http+'/chat-room/public/app/public/duanxin',
+					data:{phone:account},
+					dataType:'jsonp',
+					jsonpCallback: 'jsonp_callback',
+					success: function(data){
+						console.log(data);
+						get_count_down();
+						mui.toast(data.msg);
+					},
+					error: function(xhr, type){
+						console.log(xhr.responseText);
+						mui.toast('data error');
+					}
+				});	
+			}
+			//倒计时
+			function get_count_down() {
+				if (time === 0) { 
+				   time = 60;
+				   $('#get_phone_code').text('重新获取');
+				   return;
+				} else { 
+				   time--;
+				   $('#get_phone_code').text(time);
+				} 
+				setTimeout(function() { 
+				   get_count_down();
+				},1000);
+			}
+			//注册
+			$('#register').click(function(){
+				var account = $('#CelNum').val();
+				var verify_code = $('#celCode').val();
+				var password = $('#login_password').val();
+				var password2 = $('#confirm_password').val();
+				if(account.length != 11){
+					mui.toast('手机号必须是11位');
+					return false;
+				}
+				if(verify_code.length != 6){
+					mui.toast('短信验证码必须是6位');
+					return false;
+				}
+				if(password.length < 6 || password2.length < 6){
+					mui.toast('密码至少6位');
+					return false;
+				}
+				if(password != password2){
+					mui.toast('密码必须相同');
+					return false;
+				}
+				//提交
+				$.ajax({
+					type: 'GET',
+					url: http+'/chat-room/public/app/public/register',
+					data:{account:account,verify_code:verify_code,password:password},
+					dataType:'jsonp',
+					jsonpCallback: 'jsonp_callback',
+					success: function(data){
+						console.log(data);
+						mui.toast(data.msg);
+						if(data.code == 1){
+							setTimeout("location.href='login.html'",1000);
+						}
+					},
+					error: function(xhr, type){
+						console.log(xhr.responseText);
+						mui.toast('data error');
+					}
+				});	
+			});
+		});
+		</script>
+	</body>
+
+</html>

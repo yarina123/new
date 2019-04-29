@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户中心界面</title>
+    <!--视口-->
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="icon" href="images/favicon.ico" />
+	<!--引入第三方包，有依赖先引入依赖包-->
+	<!--先引入字体图标的样式文件-->
+	<link rel="stylesheet" href="lib/fontAwesome/css/font-awesome.css" />
+	<!--引入mui的样式文件-->
+	<link rel="stylesheet" href="lib/mui/css/mui.css" />
+	<!--引入less文件, rel="stylesheet/less,base.less为公共文件,可以在less文件里用@import导入-->
+	<!--<link rel="stylesheet/less" href="less/base.less" />-->
+	<!--引入less文件-->
+	<link rel="stylesheet" href="./less/base.css">
+	<link rel="stylesheet" href="./less/accountDetail.css">
+	<!-- <link rel="stylesheet/less" href="less/accountDetail.less" /> -->
+	<!--引入less.js的编译器文件，在浏览器里编译less文件,必须放在less文件后面，也不能放在body结束标签后面，紧跟着less文件就好-->
+	<!-- <script type="text/javascript" src="lib/less/less.js"></script> -->
+</head>
+  
+<body>
+	<!--头部-->
+	<header id="header">
+		<a href="userCenter.html" class="fa fa-angle-left"></a>
+		<span>账号详情</span>
+	</header>
+		<!--中间部分的主体内容-->
+	<main id="main">
+		<div class="user-name">
+			<span class="left">昵称 :</span>
+			<span class="right">
+				<span class="fa fa-close" id="del" style="float:right;margin-top:13px;margin-left:-10px;position:relative;z-index:100;"></span>
+				<input type="text" id="nickname" style="float:right;width:80%;border:0;background-color:inherit;font-size:inherit;text-align:right;"/>
+			</span>
+		</div>
+		<div class="all">
+			<div class="ID-num">
+				<span class="left">ID :</span>
+				<span class="right" id="user_id"></span>
+			</div>
+			<div class="account">
+			<span class="left">账号 :</span>
+			<span class="right" id="account"></span>
+		</div>
+			<div class="last-loginTime">
+			<span class="left">上次登录时间 ：</span>
+			<span class="right" id="last_login_time"></span>
+		</div>
+			
+		</div>
+		<div class="loginPage">
+				<a href="javascript:void(0)" id="confirm"><span>确定</span></a>
+		</div>
+	</main>
+	<!--底部-->
+	<footer id="footer">
+		<ul class="mui-row">
+			<li class="mui-col-xs-6 " >
+				<a href="index.html" class="fa fa-home active"><span>大厅</span></a>
+			</li>
+			<li class="mui-col-xs-6">
+				<a href="userCenter.html" class="fa fa-user"><span>我的</span></a>
+			</li>
+		</ul>
+	</footer>
+
+	<!--引入mui的js文件-->
+	<script type="text/javascript" src="lib/mui/js/mui.js">	</script>
+	<!--引入zepto的js文件-->
+	<script type="text/javascript" src="lib/zepto/zepto.min.js"> </script>
+	<!--引入模板引擎的js文件-->
+	<script type="text/javascript" src="lib/artTemplate/template.js"> </script>
+	<script type="text/javascript" src="js/accountDetail.js"> </script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script>
+	$(function(){
+		$('#user_id').text(localStorage.user_id);
+		$('#nickname').val(localStorage.nickname);
+		$('#account').text(localStorage.account);
+		if(localStorage.last_login_time == undefined){
+			$.ajax({
+				type: 'GET',
+				url: http+'/chat-room/public/app/index/lastLoginTime',
+				data:{user_id:localStorage.user_id},
+				dataType:'jsonp',
+				jsonpCallback: 'jsonp_callback',
+				success: function(data){
+					console.log(data);
+					//mui.toast(data.msg);
+					if(data.code == 1){
+						localStorage.last_login_time = data.data;
+						$('#last_login_time').text(localStorage.last_login_time);
+					}
+				},
+				error: function(xhr, type){
+					console.log(xhr.responseText);
+					mui.toast('data error');
+				}
+			});
+		}else{
+			$('#last_login_time').text(localStorage.last_login_time);
+		}
+		$('#del').click(function(){
+			$('#nickname').val('');
+			$('#nickname').focus();
+			$('#del').css({'display':'none'});
+			$('#nickname').css({'margin-right':'-15px'});
+		});
+		$('#confirm').click(function(){
+			var nickname = $('#nickname').val();
+			if(nickname == ''){
+				mui.toast('昵称不能为空');
+				return false;
+			}
+			$.ajax({
+				type: 'GET',
+				url: http+'/chat-room/public/app/index/updateNickname',
+				data:{user_id:localStorage.user_id,nickname:nickname},
+				dataType:'jsonp',
+				jsonpCallback: 'jsonp_callback',
+				success: function(data){
+					console.log(data);
+					mui.toast(data.msg);
+					if(data.code == 1){
+						localStorage.nickname = nickname;
+						setTimeout("location.href='userCenter.html'",1000);
+					}
+				},
+				error: function(xhr, type){
+					console.log(xhr.responseText);
+					mui.toast('data error');
+				}
+			});
+		});	
+	});
+	</script>
+
+</body>
+
+</html>

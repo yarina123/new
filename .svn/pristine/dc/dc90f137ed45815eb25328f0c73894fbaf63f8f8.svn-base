@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>手游</title>
+		<!--视口-->
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="icon" href="images/favicon.ico" />
+		<link rel="stylesheet" href="font/user/iconfont.css" />
+		<link rel="stylesheet" href="font/smile/iconfont.css" />
+		<link rel="stylesheet" href="font/add/iconfont.css" />
+		<link rel="stylesheet" href="font/listen/iconfont.css" />
+		<link rel="stylesheet" href="font/card/iconfont.css" />
+		<!--引入第三方包，有依赖先引入依赖包-->
+		<!--先引入字体图标的样式文件-->
+		<link rel="stylesheet" href="lib/fontAwesome/css/font-awesome.css" />
+		<!--引入mui的样式文件-->
+		<link rel="stylesheet" href="lib/mui/css/mui.css" />
+		<!--引入less文件, rel="stylesheet/less,base.less为公共文件,可以在less文件里用@import导入-->
+		<!--<link rel="stylesheet/less" href="less/base.less" />-->
+		<!--引入less文件-->
+		<link rel="stylesheet/less" href="less/customer-service.less" />
+		<!--引入less.js的编译器文件，在浏览器里编译less文件,必须放在less文件后面，也不能放在body结束标签后面，紧跟着less文件就好-->
+		<script type="text/javascript" src="lib/less/less.js"></script>
+		<script src="font/card/iconfont.js"></script>
+		<style>
+			.icon {
+				width: 1em;
+				height: 1em;
+				vertical-align: -0.15em;
+				fill: currentColor;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header id="header">
+			<a href="chatroom1.html" id="left" class="fa fa-angle-left"></a>
+			<span >客服</span>
+
+		</header>
+		<!--中间部分的主体内容-->
+		<main id="main">
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<!--这里放置真实显示的DOM内容-->
+
+				</div>
+			</div>
+
+		</main>
+		<!--底部-->
+		<footer id="footer">
+			<div>
+				<span style="font-size:26px;" class="iconfont icon-icon_line_listen_">
+					
+				</span>
+				&nbsp;<input style="width:240px; height:35px;border-radius:20px;vertical-align:middle;margin-top:1px;" type="text"/>
+				&nbsp;<span style="font-size:26px;" class="iconfont icon-smile"></span>
+				<span style="font-size:30px;" class="iconfont icon-addition"></span>
+			</div>
+		</footer>
+
+		<!--引入mui的js文件-->
+		<script type="text/javascript" src="lib/mui/js/mui.js">
+		</script>
+		<!--引入zepto的js文件-->
+		<script type="text/javascript" src="lib/zepto/zepto.min.js">
+		</script>
+		<!--引入模板引擎的js文件-->
+		<script type="text/javascript" src="lib/artTemplate/template.js">
+		</script>
+		<script type="text/javascript" src="js/customer-service.js">
+		</script>
+	</body>
+
+</html>

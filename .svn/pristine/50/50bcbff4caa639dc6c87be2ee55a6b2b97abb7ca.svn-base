@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>一号厅</title>
+	<!--视口-->
+	<meta name="viewport"
+		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="icon" href="images/favicon.ico" />
+	<link rel="stylesheet" href="font/user/iconfont.css" />
+	<link rel="stylesheet" href="font/smile/iconfont.css" />
+	<link rel="stylesheet" href="font/add/iconfont.css" />
+	<link rel="stylesheet" href="font/card/iconfont.css" />
+	<!--引入第三方包，有依赖先引入依赖包-->
+	<!--先引入字体图标的样式文件-->
+	<link rel="stylesheet" href="lib/fontAwesome/css/font-awesome.css" />
+	<!--引入mui的样式文件-->
+	<link rel="stylesheet" href="lib/mui/css/mui.css" />
+	<!--引入less文件, rel="stylesheet/less,base.less为公共文件,可以在less文件里用@import导入-->
+	<!--<link rel="stylesheet/less" href="less/base.less" />-->
+	<!--引入less文件-->
+	<link rel="stylesheet" href="./less/base.css">
+	<link rel="stylesheet" href="./less/chatroom1.css">
+	<!-- <link rel="stylesheet/less" href="less/chatroom1.less" /> -->
+	<!--引入less.js的编译器文件，在浏览器里编译less文件,必须放在less文件后面，也不能放在body结束标签后面，紧跟着less文件就好-->
+	<!-- <script type="text/javascript" src="lib/less/less.js"></script> -->
+	<script src="font/card/iconfont.js"></script>
+	<link href="http://vjs.zencdn.net/5.20.1/video-js.css" rel="stylesheet">
+	<style>
+		.icon {
+			width: 1em;
+			height: 1em;
+			vertical-align: -0.15em;
+			fill: currentColor;
+			overflow: hidden;
+		}
+
+		.video-js .vjs-tech {
+			position: relative !important;
+		}
+
+		.msg {
+			float: left;
+			width: 100%;
+		}
+
+		.msg .msg_img {
+			float: left;
+			width: 20%;
+			min-height: 30px;
+		}
+
+		.msg .msg_img img {
+			width: 90%;
+		}
+
+		.msg .msg_content {
+			float: left;
+			width: 80%;
+		}
+
+		.msg .msg_nickname {
+			float: left;
+			color: gray;
+		}
+
+		.msg .msg_msg {
+			float: left;
+			width: 100%;
+			word-wrap: break-word;
+		}
+
+		#member {
+			position: fixed;
+			top: 60px;
+			height: 400px;
+		}
+
+		#member .list {
+			float: left;
+			width: 100px;
+			border: 1px solid red;
+			height: 120px;
+		}
+
+		#member .list .photo {
+			width: 100px;
+			border: 1px solid red;
+			height: 100px;
+		}
+
+		#member .list .nickname {
+			color: blue;
+			text-align: center;
+		}
+		.send{
+			background-color:#ddd;
+			color:gray;
+		}
+		.down .mui-row li a.active{background-color:green;color:white;}
+	</style>
+</head>
+
+<body>
+	<!--头部-->
+	<header id="header">
+		<a href="index.html" id="left" class="fa fa-angle-left"></a>
+		<span id="right">
+			<span>卡卡湾一号桌</span>
+			<a href="javascript:void(0)" class="fa fa-bars" id="record"></a>
+			<!--<a href="customer-service.html" class="fa fa-headphones"></a>-->
+			<a href="javascript:void(0)" class="iconfont" id="member_info">&#xe601</a>
+		</span>
+	</header>
+	<div id="zhibo" style="position: fixed;top: 60px;width:100%;">
+		<video id="rtmpVideo" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" data-setup='{}' style='width: 100%;height: 230px;'>
+			<source src="rtmp://103.60.165.160:1985/jinding888/jd10001" type="rtmp/flv">
+			<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+		</video>
+		<script src="http://vjs.zencdn.net/5.20.1/video.js"></script>
+		<script>
+		//videojs配置
+	var player = videojs('rtmpVideo',{
+		autoplay : true,
+		muted: true,
+		loop : true,
+		bigPlayButton: true,
+		textTrackDisplay: false,
+		posterImage: false,
+		errorDisplay: false,
+	});
+		</script>
+	</div>
+	<!--中间部分的主体内容-->
+	<main id="main"
+		style="position:fixed;top:290px;background-color:inherit;width:100%;height:100px;overflow:auto;padding:10px;">
+
+	</main>
+	<!--底部-->
+	<footer id="footer">
+		<div class="up" >
+			<!--<svg class="icon" aria-hidden="true" style="font-size:28px;">
+				<use xlink:href="#icon-cards"></use>
+			</svg>-->
+			<span><img class="throw1" src="./images/throw1.png" alt="" /></span> &nbsp;
+			<input style="width:60%; height:34px;border-radius:5px;vertical-align:middle;margin-top:-12px;"
+				type="text" id="content" /> &nbsp;
+			<!--<span style="font-size:26px;position: relative;bottom: 10px" class="iconfont icon-smile"></span>
+			<span style="font-size:32px;position: relative;bottom:7px" class="iconfont icon-addition" id="add"></span>-->
+			<button type="button" class="mui-btn send" id="send" style="margin-top:8px;">发送</button>
+		</div>
+	</footer>
+		<div class="down">
+			<div class="result">
+				<span class="key"><img class="throw1" src="./images/key.png" alt="" /></span> &nbsp;
+				<span id="type" style="color:green;position: relative;top: -10px;font-size: 18px;"></span>
+				<span style="width:180px; height:34px;border-radius:5px;vertical-align:middle;margin-top: -25px;border: 1px solid white;display: inline-block;background-color: white;padding: 6px;" id="xiazhu_score">0</span>
+				<a class="score" style="float: right;width: auto;font-size:14px;">身上分：<span id="score"></span></a>
+			</div>
+			<ul class="mui-row  up">
+			<li class="mui-col-xs-3 " >
+				<a href="javascript:void(0)" class="one" id="xian">闲</a>
+			</li>
+			<li class="mui-col-xs-3">
+				<a href="javascript:void(0)" class="two" id="he">和</a>
+			</li>
+			<li class="mui-col-xs-3 ">
+				<a href="javascript:void(0)" class="three" id="zhuang">庄</a>
+			</li>
+			<li class="mui-col-xs-3">
+				<a href="javascript:void(0)" id="xiandui">闲对</a>
+			</li>
+			<li class="mui-col-xs-3" >
+				<a href="javascript:void(0)" id="zhuangdui">庄对</a>
+			</li>
+			
+			<li class="mui-col-xs-3">
+				<a href="javascript:void(0)" id="shuangdui">双对</a>
+			</li>
+			<li class="mui-col-xs-3" >
+				<a href="javascript:void(0)" id="sanbao">三宝</a>
+			</li>
+			<li class="mui-col-xs-3">
+				<a href="javascript:void(0)" style="background-color:#aaabac  ; border: 1px solid #aaabac; color: white;letter-spacing: 5px;" >撤销</a>
+			</li>
+			
+		</ul>
+			<table  class="num"  border="1px soild #000" cellspacing="0" cellpadding="0">
+				<tr>
+					<td id="num1">1</td>
+					<td id="num2">2</td>
+					<td id="num3">3</td>
+					<td style="font-size: 16px;" id="del">删除</td>
+				</tr>
+				<tr>
+					<td id="num4">4</td>
+					<td id="num5">5</td>
+					<td id="num6">6</td>
+					<td id="xiazhu" rowspan="3" style="background-color: #198c6e;color: white; font-size: 18px;">下注</td>
+				</tr>
+				<tr>
+					<td id="num7">7</td>
+					<td id="num8">8</td>
+					<td id="num9">9</td>
+				</tr>
+				<tr>
+					<td id="num0" colspan="3">0</td>
+				</tr>
+			</table>
+		</div>
+		
+
+	<!--引入mui的js文件-->
+	<script type="text/javascript" src="lib/mui/js/mui.js">
+	</script>
+	<!--引入zepto的js文件-->
+	<script type="text/javascript" src="lib/zepto/zepto.min.js">
+	</script>
+	<!--引入模板引擎的js文件-->
+	<script type="text/javascript" src="lib/artTemplate/template.js">
+	</script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/chatroom1.js"></script>
+	
+</body>
+
+</html>

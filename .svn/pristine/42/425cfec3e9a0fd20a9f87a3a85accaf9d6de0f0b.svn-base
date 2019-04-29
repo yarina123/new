@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>手游</title>
+		<!--视口-->
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="icon" href="images/" />
+		<!--引入第三方包，有依赖先引入依赖包-->
+		<!--先引入字体图标的样式文件-->
+		<link rel="stylesheet" href="lib/fontAwesome/css/font-awesome.css" />
+		<!--引入mui的样式文件-->
+		<link rel="stylesheet" href="lib/mui/css/mui.css" />
+		<link rel="stylesheet" href="./less/base.css">
+		<link rel="stylesheet" href="">
+		<!--引入less文件, rel="stylesheet/less,base.less为公共文件,可以在less文件里用@import导入-->
+		<!--<link rel="stylesheet/less" href="less/base.less" />-->
+		<!--引入less文件-->
+		<!-- <link rel="stylesheet/less" href="less/testcode.less" /> -->
+		<!--引入less.js的编译器文件，在浏览器里编译less文件,必须放在less文件后面，也不能放在body结束标签后面，紧跟着less文件就好-->
+		<!-- <script type="text/javascript" src="lib/less/less.js"></script> -->
+	</head>
+	<style type="text/css">
+		table {
+			width: 100%;
+			height: 100%;
+		}
+		
+		tr {
+			width: 1000px;
+			height: 50px;
+			line-height: 50px;
+		}
+		
+		td {
+			border: 0.5px solid rgba(0, 0, 0, 0.1);
+			text-align: center;
+			width: 88px;
+			height: 40px;
+			margin-left: 5px;
+			border-collapse: collapse;
+			font-size: 22px;
+		}
+	</style>
+
+	<body>
+		<!--头部-->
+
+		<!--中间部分的主体内容-->
+		<table class="num" border="1px soild #000" cellspacing="0" cellpadding="0">
+			<tr>
+				<td id="1">1</td>
+				<td id="2">2</td>
+				<td id="3">3</td>
+				<td style="font-size: 16px;" id="del">删除</td>
+			</tr>
+			<tr>
+				<td id="4">4</td>
+				<td id="5">5</td>
+				<td id="6">6</td>
+				<td id="xiazhu" rowspan="3" style="background-color: #198c6e;color: white; font-size: 18px;">下注</td>
+			</tr>
+			<tr>
+				<td id="7">7</td>
+				<td id="8">8</td>
+				<td id="9">9</td>
+			</tr>
+			<tr>
+				<td colspan="3">0</td>
+			</tr>
+		</table>
+		</main>
+		</div>
+
+		<!--底部-->
+		<footer id="footer">
+			<ul class="mui-row">
+				<li class="mui-col-xs-6 ">
+					<a href="index.html" class="fa fa-home active"><span>大厅</span></a>
+				</li>
+				<li class="mui-col-xs-6">
+					<a href="userCenter.html" class="fa fa-user"><span>我的</span></a>
+				</li>
+			</ul>
+		</footer>
+		<script type="text/javascript">
+			var trList = document.getElementsByTagName('tr')
+			function gettag(x){
+				return document.getElementsByTagName(x)
+			}
+			for(var i = 0; i < trList.length; i++) {
+				trList[i].onclick = function() {
+					//console.log("11111")
+					for(var j = 0; j < trList.length; j++) {					
+							console.log(gettag(this.trList[j]))
+						
+					}
+				}
+			}
+		</script>
+
+		<!--引入mui的js文件-->
+		<script type="text/javascript" src="lib/mui/js/mui.js">
+		</script>
+		<!--引入zepto的js文件-->
+		<script type="text/javascript" src="lib/zepto/zepto.min.js">
+		</script>
+		<!--引入模板引擎的js文件-->
+		<script type="text/javascript" src="lib/artTemplate/template.js">
+		</script>
+		<script type="text/javascript" src="js/testCode.js">
+		</script>
+
+	</body>
+
+</html>

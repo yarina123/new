@@ -1,0 +1,49 @@
+
+#header {
+  height: 60px;
+  line-height: 80px;
+  color: white;
+  font-size: 24px;
+  padding: 0 10px;
+  text-align: center;
+}
+#header #left {
+  color: white;
+  font-size: 28px;
+  font-weight: lighter;
+  float: left;
+  line-height: 80px;
+}
+#header span {
+  font-family: "KaiTi";
+}
+#main {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  height: 100%;
+  background-color: #F3F3F3;
+}
+#main ul {
+  padding-top: 40px;
+}
+#main ul li {
+  padding: 12px;
+}
+#main ul li a {
+  display: block;
+}
+#main ul li a img {
+  width: 100%;
+  border-radius: 50px;
+}
+#footer {
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+#footer div {
+  padding: 0 5px;
+  line-height: 50px;
+  height: 100%;
+  text-align: center;
+}

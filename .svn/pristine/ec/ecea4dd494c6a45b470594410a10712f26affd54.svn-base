@@ -1,0 +1,136 @@
+@import "base.less";
+
+#header {
+    height:170px;
+    position: fixed;
+        .title{
+            text-align: center;
+            color: white;
+            padding-top:20px;
+            font-weight:600;
+            letter-spacing:2px;
+             font-family: "KaiTi";
+             font-size:24px;
+        }
+    //  width: 100%;
+    #userC{
+        letter-spacing:2px;
+        margin-top: 10px;
+        color: white;
+         font-family: "KaiTi";
+        font-size: 16px;
+          #userIcon {
+        float: left;
+        height: 100px;
+        width: 100%;
+        padding: 0;
+        padding: 10px 15px;
+        a {
+            width: 100%;
+            display: block;
+            
+            img {
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+            }
+        }
+    }
+    #info {
+        position: absolute;
+        top:60px;
+        left: 105px;
+       div{
+           padding-top:5px;
+       }
+        .weChatNum{
+            color:white ;
+        }
+    }
+    }
+}
+
+
+
+
+body{
+      overflow:hidden;
+}
+#main{
+    width: 100%;
+    height: 100%;
+    background-color:rgba(255,255,255,0.2);
+    position: absolute;
+    top:170px;
+     .account{
+        position: fixed;
+        text-align: center;
+        background-color:rgba(255,255,255,0.8);
+        border-bottom:3px solid rgba(0,0,0,0.1);
+//          margin-top: 10px;
+            height: 45px;
+            width: 100%;
+            line-height:45px;
+                         >a{
+         color:goldenrod;
+        font-weight:600;
+        font-size: 20px;
+        margin-left:10px;
+        span{
+            font-family: "KaiTi";
+            color: #555555;
+            font-size:18px;
+            margin-left: 10px;
+
+        }
+        
+        }
+    }
+    .all{
+         margin-top:55px;
+      >.key,
+   .record{
+            background-color:rgba(255,255,255,0.8);
+            height: 45px;
+            width: 100%;     
+            line-height:45px;
+            margin-top:10px;
+//          border-radius:10px;
+             >a{
+         color:red;
+        font-weight:600;
+        font-size: 20px;
+        margin-left:10px;
+        span{
+            font-family: "KaiTi";
+            color: #555555;
+            font-size:18px;
+            margin-left: 10px;
+        }
+        
+        }
+    } 
+    >.record{
+        a{
+            color: purple;
+        }
+    }
+
+    .loginPage{
+           margin:30px;
+           margin-top: 50px;
+           height: 50px;
+           background-color:#188b65;
+           text-align: center;
+           line-height:50px;
+           
+          a{
+              span{
+                   font-family: "KaiTi";
+                   color:white;
+                   font-size: 22px;
+              }
+          }
+        }
+}
+}

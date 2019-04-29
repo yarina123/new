@@ -1,0 +1,23 @@
+.mui-scroll-wrapper {
+    height: 580px;
+    background-color: #F3F3F3;
+  }
+  .mui-scroll-wrapper #main {
+    padding-top: 75px;
+    padding-bottom: 50px;
+    height: 100%;
+  }
+  .mui-scroll-wrapper #main ul {
+    text-align: center;
+  }
+  .mui-scroll-wrapper #main ul li {
+    margin: 0 20px;
+    margin-top: 15px;
+  }
+  .mui-scroll-wrapper #main ul li a {
+    display: block;
+  }
+  .mui-scroll-wrapper #main ul li a img {
+    width: 95%;
+    border-radius: 10px;
+  }

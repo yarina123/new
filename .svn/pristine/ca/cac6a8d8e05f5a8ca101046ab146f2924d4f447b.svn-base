@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户中心界面</title>
+    <!--视口-->
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="icon" href="images/favicon.ico" />
+	<!--引入第三方包，有依赖先引入依赖包-->
+	<!--先引入字体图标的样式文件-->
+	<link rel="stylesheet" href="lib/fontAwesome/css/font-awesome.css" />
+	<link rel="stylesheet" href="font/lock/iconfont.css" />
+	<link rel="stylesheet" href="font/shezhi/iconfont.css" />
+
+	<!--引入mui的样式文件-->
+	<link rel="stylesheet" href="lib/mui/css/mui.css" />
+	<link rel="stylesheet" href="./less/base.css">
+	<link rel="stylesheet" href="./less/userCenter.css">
+	<!--引入less文件, rel="stylesheet/less,base.less为公共文件,可以在less文件里用@import导入-->
+	<!--<link rel="stylesheet/less" href="less/base.less" />-->
+	<!--引入less文件-->
+	<!-- <link rel="stylesheet/less" href="less/userCenterTest.less" /> -->
+	<!--引入less.js的编译器文件，在浏览器里编译less文件,必须放在less文件后面，也不能放在body结束标签后面，紧跟着less文件就好-->
+	<!-- <script type="text/javascript" src="lib/less/less.js"></script> -->
+</head>
+  
+<body>
+<!--底部-->
+	<footer id="footer">
+		<ul class="mui-row">
+			<li class="mui-col-xs-3 " >
+				<a href="index.html" >闲</a>
+			</li>
+			<li class="mui-col-xs-3">
+				<a href="userCenter.html" >和</a>
+			</li>
+			<li class="mui-col-xs-3 " >
+				<a href="index.html" >庄</a>
+			</li>
+			<li class="mui-col-xs-3">
+				<a href="userCenter.html" >闲对</a>
+			</li>
+			<li class="mui-col-xs-3" >
+				<a href="index.html" >庄对</a>
+			</li>
+			<li class="mui-col-xs-3">
+				<a href="userCenter.html" >双对</a>
+			</li>
+			<li class="mui-col-xs-3" >
+				<a href="index.html" >三宝</a>
+			</li>
+			<li class="mui-col-xs-3">
+				<a href="userCenter.html" >撤销</a>
+			</li>
+		</ul>
+	</footer>
+<style>
+	#footer{
+		width: 100%;
+		height: 200px;
+		
+	}
+	ul{
+		margin: auto;
+		width: 600px;
+	height: 100px;
+	padding: 10px;;
+	}
+	li{
+		/*border: 1px solid #000;*/
+		background-color: pink;
+		border-radius: 5px;
+		width: 5%;
+		height: 100%;
+		/*padding: 0px 0px 0px 0px;*/
+	
+	}
+	a{
+		display: block;
+		width: 95%;
+		height: 95%;
+			border: 1px solid #000;
+			text-align: center;
+		/*margin: 0 2px;*/
+	}
+</style>
+<!--引入mui的js文件-->
+<script type="text/javascript" src="lib/mui/js/mui.js">	</script>
+<!--引入zepto的js文件-->
+<script type="text/javascript" src="lib/zepto/zepto.min.js"> </script>
+<!--引入模板引擎的js文件-->
+<script type="text/javascript" src="lib/artTemplate/template.js"> </script>
+<!--<script type="text/javascript" src="js/userCenter.js"> </script>-->
+</body>
+
+</html>

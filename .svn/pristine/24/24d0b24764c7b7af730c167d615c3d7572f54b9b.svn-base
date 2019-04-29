@@ -1,0 +1,92 @@
+@import "base.less";
+#header{
+    height: 80px;
+    background-color: #3b9c83;
+    h4 {
+        font-size: 18px;
+        font-family: "simhei";
+        line-height: 110px;
+        letter-spacing: 0.5px;
+    }
+}
+#main{
+ padding-top:100px;
+    width: 100%;
+    height: 100%;
+   background-color: #fff;
+      position: absolute;
+    .logo {
+        height: 90px;
+        width: 100px;
+        margin: 30px auto;
+        margin-bottom: 20px;
+        img {
+            height: 80px;
+        }
+    }
+
+      ul{
+           position: absolute;
+           left: 50%;
+           margin-left:-180px;
+          height: 220px;
+          padding-left:20px;        
+          li{
+              text-align: left;
+              height:50px;
+              font-size:16px; 
+              font-weight:400;     
+              margin:0 10px;
+              font-family: simhei;
+              color:#555;
+              border-bottom:1px solid rgba(0,0,0,0.2);
+              #celCode{
+                  width:110px;
+                 margin-left: -10px;
+              }
+              .get-imgcode{
+         
+                  }
+              #CelNum{
+                  margin-left:-25px;
+              }
+              span{
+                  display:inline-block;
+                  height: 30px;
+                  width: 100px;
+              }
+              img{
+                  height: 40px;
+                  width: 70px;
+                  float: right;
+//                vertical-align:middle;
+                  margin-left:3px;
+              }
+              input{
+                  height:30px;
+                  margin-top:8px;
+                  width:190px;
+                  border-radius:5px;
+                  outline: none;
+                  border: 0;
+                  background: none;
+                  font-size:13px;
+                  letter-spacing: 1px;
+              }   
+              input::-webkit-input-placeholder {
+            color: rgba(0, 0, 0, 0.2);
+        }
+          }
+        .register,.direct-login{
+        border: 0.2px solid rgba(0,0,0,0.2);
+        margin:20px 10px;
+        text-align: center;
+        height:40px;
+        line-height:40px;
+        a{
+            color: #3b9c83;
+        }    
+    } 
+ 
+}
+}
